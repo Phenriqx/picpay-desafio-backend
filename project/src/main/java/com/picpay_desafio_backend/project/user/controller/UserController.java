@@ -16,18 +16,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/users")
 @RequiredArgsConstructor
 public class UserController {
-    private final UserService userService;
-    private final UserMapper userMapper;
-
-    @PostMapping("/register")
-    public ResponseEntity<UserResponseDTO> register(@RequestBody UserRequestDTO request) {
-        User user = userMapper.toEntity(request);
-        user = userService.saveUser(user);
-        return ResponseEntity.status(201).body(userMapper.toDto(user));
-    }
-
-    @PostMapping("/login")
-    public ResponseEntity<UserResponseDTO> login(@RequestBody UserRequestDTO request) {
-        return null;
-    }
+    
 }
