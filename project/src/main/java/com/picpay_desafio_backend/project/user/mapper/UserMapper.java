@@ -2,8 +2,7 @@ package com.picpay_desafio_backend.project.user.mapper;
 
 import com.picpay_desafio_backend.project.user.domain.User;
 import com.picpay_desafio_backend.project.user.dto.UserRequestDTO;
-import com.picpay_desafio_backend.project.user.dto.UserRespondeDTO;
-import org.apache.coyote.Response;
+import com.picpay_desafio_backend.project.user.dto.UserResponseDTO;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -18,13 +17,12 @@ public class UserMapper {
         return user;
     }
 
-    public UserRespondeDTO toDto(User user) {
-        UserRespondeDTO dto = new UserRespondeDTO();
-        dto.setFullName(user.getFullName());
-        dto.setEmail(user.getEmail());
-        dto.setCpf(user.getCpf());
-        dto.setId(user.getId());
-
-        return dto;
+    public UserResponseDTO toDto(User user) {
+        return new UserResponseDTO(
+            user.getId(),
+            user.getFullName(),
+            user.getEmail(),
+            user.getCpf()
+        );
     }
 }
