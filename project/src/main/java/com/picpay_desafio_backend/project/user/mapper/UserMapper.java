@@ -4,6 +4,7 @@ import com.picpay_desafio_backend.project.user.domain.User;
 import com.picpay_desafio_backend.project.user.dto.UserRequestDTO;
 import com.picpay_desafio_backend.project.user.dto.UserResponseDTO;
 import org.springframework.stereotype.Component;
+import java.util.*;
 
 @Component
 public class UserMapper {
@@ -24,5 +25,11 @@ public class UserMapper {
             user.getEmail(),
             user.getCpf()
         );
+    }
+
+    public List<UserResponseDTO> toResponseDTOList(List<User> users) {
+        return users.stream()
+            .map(this::toDto)
+            .toList();
     }
 }

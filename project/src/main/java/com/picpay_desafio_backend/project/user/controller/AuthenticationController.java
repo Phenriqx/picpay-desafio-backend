@@ -25,8 +25,9 @@ public class AuthenticationController {
 
     @PostMapping("/register")
     public ResponseEntity<UserResponseDTO> register(@RequestBody @Valid UserRequestDTO request) {
-        User user = userMapper.toEntity(request);
-        user = userService.saveUser(user);
+        User user = userService.saveUser(
+            userMapper.toEntity(request)
+        );
         return ResponseEntity.status(201).body(userMapper.toDto(user));
     }
 

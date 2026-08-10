@@ -1,10 +1,11 @@
 package com.picpay_desafio_backend.project.user.repository;
 
 import com.picpay_desafio_backend.project.user.domain.User;
+import com.picpay_desafio_backend.project.user.dto.UserResponseDTO;
 import org.jspecify.annotations.NonNull;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.Optional;
+import java.util.*;
 
 /*
     Repositórios Spring Data JPA são interfaces que herdam da hierarquia do Spring Data.
@@ -16,4 +17,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     boolean existsByCpf(String cpf);
     boolean existsByEmail(String email);
+
+    Optional<User> getUserById(Integer id);
 }
