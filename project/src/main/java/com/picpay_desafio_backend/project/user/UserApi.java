@@ -1,6 +1,9 @@
 package com.picpay_desafio_backend.project.user;
 
 import com.picpay_desafio_backend.project.user.application.UserService;
+import com.picpay_desafio_backend.project.user.domain.User;
+import com.picpay_desafio_backend.project.user.dto.UserResponseDTO;
+import com.picpay_desafio_backend.project.user.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,4 +14,9 @@ public class UserApi {
     // não consiga acessar os métodos internos desse módulo
     // transfer -> userAPI -> userService
     private final UserService userService;
+    private final UserMapper userMapper;
+
+    public UserResponseDTO findByLogin(String email) {
+        return userMapper.toDto(userService.findByEmail(email));
+    }
 }

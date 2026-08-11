@@ -1,4 +1,4 @@
-package com.picpay_desafio_backend.project.user.controller;
+package com.picpay_desafio_backend.project.user.dto;
 
 import jakarta.validation.constraints.NotBlank;
 

@@ -1,8 +1,6 @@
 package com.picpay_desafio_backend.project.user.controller;
 
 import com.picpay_desafio_backend.project.user.application.UserService;
-import com.picpay_desafio_backend.project.user.domain.User;
-import com.picpay_desafio_backend.project.user.dto.UserRequestDTO;
 import com.picpay_desafio_backend.project.user.dto.UserResponseDTO;
 import com.picpay_desafio_backend.project.user.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;

@@ -4,6 +4,7 @@ import com.picpay_desafio_backend.project.user.domain.User;
 import com.picpay_desafio_backend.project.user.dto.UserResponseDTO;
 import org.jspecify.annotations.NonNull;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.*;
 
