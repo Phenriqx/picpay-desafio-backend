@@ -14,9 +14,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-@Builder
 @NoArgsConstructor
-@AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 
 // Quando usamos o Spring Security, nossa entity User precisa implementar a interface UserDetails, que vem do próprio Spring Security
@@ -49,6 +47,24 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING) // Com EnumType.STRING definido, o JPA irá salvar os valores como Strings na base de dados, ao invés de números
     @Column(name = "user_type")
     private UserType userType;
+
+    @OneToOne(
+        mappedBy = "user",
+        cascade = CascadeType.ALL,
+        orphanRemoval = true
+    )
+    @Setter(AccessLevel.NONE)
+    private Wallet wallet;
+
+    public User(String fullName, String cpf, String email, String password, UserType userType) {
+        this.fullName = fullName;
+        this.cpf = cpf;
+        this.email = email;
+        this.password = password;
+        this.userType = userType;
+
+        this.wallet = new Wallet(this);
+    }
 
     public boolean canTransfer() {
         return userType == UserType.COMMON;

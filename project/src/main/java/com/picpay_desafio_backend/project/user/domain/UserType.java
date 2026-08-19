@@ -4,8 +4,8 @@ import lombok.Getter;
 
 @Getter
 public enum UserType {
-    COMMON("common"),
-    MERCHANT("merchant");
+    COMMON("COMMON"),
+    MERCHANT("MERCHANT");
 
     private String role;
     UserType(String role) {

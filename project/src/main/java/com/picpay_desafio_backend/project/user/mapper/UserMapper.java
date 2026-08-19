@@ -9,13 +9,13 @@ import java.util.*;
 @Component
 public class UserMapper {
     public User toEntity(UserRequestDTO dto) {
-        User user = new User();
-        user.setEmail(dto.email());
-        user.setFullName(dto.fullName());
-        user.setCpf(dto.cpf());
-        user.setPassword(dto.password());
-
-        return user;
+        return new User(
+            dto.fullName(),
+            dto.cpf(),
+            dto.email(),
+            dto.password(),
+            dto.userType()
+        );
     }
 
     public UserResponseDTO toDto(User user) {
@@ -23,7 +23,8 @@ public class UserMapper {
             user.getId(),
             user.getFullName(),
             user.getEmail(),
-            user.getCpf()
+            user.getCpf(),
+            user.getUserType()
         );
     }
 

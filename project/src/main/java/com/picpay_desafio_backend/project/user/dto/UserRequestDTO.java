@@ -21,5 +21,7 @@ public record UserRequestDTO(
     @NotNull @NotBlank
     String password,
 
+    @NotNull
+    @JsonProperty("user_type")
     UserType userType
 ) {}
