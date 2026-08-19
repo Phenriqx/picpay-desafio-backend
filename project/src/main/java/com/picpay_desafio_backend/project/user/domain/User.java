@@ -76,6 +76,7 @@ public class User implements UserDetails {
             return List.of(
                 new SimpleGrantedAuthority("transfer:send"),
                 new SimpleGrantedAuthority("transfer:receive")
+//                new SimpleGrantedAuthority("ROLE_" + userType.getRole())
             );
         }
 

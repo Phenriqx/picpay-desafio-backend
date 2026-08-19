@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -17,6 +18,7 @@ import com.picpay_desafio_backend.project.config.TokenSecurityFilter.*;
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity
 public class SecurityConfig {
 
     @Autowired
@@ -37,6 +39,9 @@ public class SecurityConfig {
                     "/api/auth/login",
                     "/h2-console/**"
                 ).permitAll()
+                .requestMatchers(
+                    "/api/transfer/new"
+                ).hasAuthority("transfer:send")
                 .anyRequest().authenticated())
             .addFilterBefore(tokenSecurityFilter, UsernamePasswordAuthenticationFilter.class)
             .formLogin(form -> form.disable());

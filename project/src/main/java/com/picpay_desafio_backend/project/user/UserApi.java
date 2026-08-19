@@ -1,5 +1,6 @@
 package com.picpay_desafio_backend.project.user;
 
+import com.picpay_desafio_backend.project.shared.provider.AuthenticatedUser;
 import com.picpay_desafio_backend.project.user.application.UserService;
 import com.picpay_desafio_backend.project.user.domain.User;
 import com.picpay_desafio_backend.project.user.dto.UserResponseDTO;
@@ -16,7 +17,11 @@ public class UserApi {
     private final UserService userService;
     private final UserMapper userMapper;
 
-    public UserResponseDTO findByLogin(String email) {
-        return userMapper.toDto(userService.findByEmail(email));
+    public AuthenticatedUser findByLogin(String email) {
+        User user = userService.findByEmail(email);
+        return new AuthenticatedUser(
+            user.getId(),
+            user.getEmail()
+        );
     }
 }
