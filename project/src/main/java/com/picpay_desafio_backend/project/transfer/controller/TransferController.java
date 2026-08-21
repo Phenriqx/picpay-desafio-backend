@@ -4,6 +4,8 @@ import com.picpay_desafio_backend.project.transfer.application.TransferService;
 import com.picpay_desafio_backend.project.transfer.dto.TransferRequestDTO;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -22,11 +24,13 @@ public class TransferController {
     // isso vem da regra de negócio, então usuários MERCHANT não conseguiriam acessar esse endpoint
     @PreAuthorize("hasAuthority('transfer:send')")
     @PostMapping("/new")
-    public void transfer(Authentication authentication, @RequestBody @Valid TransferRequestDTO request) {
+    public ResponseEntity<Void> transfer(Authentication authentication, @RequestBody @Valid TransferRequestDTO request) {
         transferService.transfer(
             authentication.getName(),
             request.payee(),
             request.amount()
         );
+
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 }

@@ -1,5 +1,6 @@
 package com.picpay_desafio_backend.project.user.application;
 
+import com.picpay_desafio_backend.project.shared.provider.WalletTransferResult;
 import com.picpay_desafio_backend.project.user.domain.Wallet;
 import com.picpay_desafio_backend.project.user.domain.exception.UserNotFoundException;
 import com.picpay_desafio_backend.project.user.repository.WalletRepository;
@@ -13,7 +14,7 @@ import java.math.BigDecimal;
 public class WalletService {
     private final WalletRepository walletRepository;
 
-    public void transfer(Integer payerID, Integer payeeID, BigDecimal amount) {
+    public WalletTransferResult transfer(Integer payerID, Integer payeeID, BigDecimal amount) {
         Wallet payer = walletRepository.findByUserId(payerID)
             .orElseThrow(UserNotFoundException::new);
 
@@ -22,5 +23,10 @@ public class WalletService {
 
         payer.withdraw(amount);
         payee.deposit(amount);
+
+        return new WalletTransferResult(
+            payer.getId(),
+            payee.getId()
+        );
     }
 }
